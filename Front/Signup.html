@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forms pr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+        @font-face {
+            font-family: 'Komika Axis';
+            src: url(Komika_Axis.ttf) format('truetype');
+        }
+
+        @media (max-width:500px) {
+
+            .container {
+                width: 90%;
+                padding: 15px;
+            }
+
+        }
+
+        body {
+            background: linear-gradient(135deg, #ffffff, #8f94fb);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* .input-group{
+position:relative;
+margin:25px 0;
+}
+
+.input-group input{
+width:100%;
+padding:10px 5px;
+border:none;
+border-bottom:2px solid black;
+outline:none;
+font-size:16px;
+background:none;
+}
+
+.input-group label{
+position:absolute;
+left:5px;
+top:10px;
+color:#777;
+transition:0.3s;
+}
+
+.input-group input:focus + label,
+.input-group input:valid + label{
+top:-10px;
+font-size:12px;
+color:#1100ff;
+} */
+
+
+        .container h1 {
+            text-align: center;
+            color: #1100ff;
+            letter-spacing: 4px;
+            text-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .container {
+            max-width: 400px;
+            padding: 20px;
+            background-color: #ffffff;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            transition: 0.3s;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        p {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        a {
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            color: rgb(0, 0, 0);
+            font-size: 16px;
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border: none;
+            border-bottom: 3px solid black;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-bottom: 3px solid #000000;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        }
+
+        input:hover {
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin: 20px 0;
+            border: 3px solid black;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+            padding: 12px;
+            width: 100%;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #1100ff, #5f5bff);
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script>
+        const SERVER_URL = "http://localhost:8081";
+
+        async function signup(event) {
+            event.preventDefault();
+            try {
+                const userData = {
+                    username: document.getElementById("username").value,
+                    email: document.getElementById("email").value,
+                    password: document.getElementById("password").value
+                };
+
+                const response = await fetch(`${SERVER_URL}/api/register`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.text();
+                alert(result);
+                alert("Successfully Register")
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Something went wrong!");
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Sign Up</h1>
+        <form onsubmit="signup(event)">
+            <!-- <div class="input-group">
+    <input type="text" required>
+    <label>👤 Username</label>
+</div> -->
+
+            <input type="text" id="username" placeholder="👤 Username">
+            <input type="email" id="email" placeholder="📧 Email">
+            <input type="password" id="password" minlength="6" placeholder="🔒 Password">
+            <input type="submit" value="Signup">
+        </form>
+        <p>If you already have an account :<a href="#">Login</a></p>
+    </div>
+</body>
+
+</html>
