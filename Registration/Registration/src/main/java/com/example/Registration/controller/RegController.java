@@ -22,17 +22,22 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/api")
 public class RegController {
 
-	@Autowired
-	private RegService regService;
+    @Autowired
+    private RegService regService;
 
-	@GetMapping("/h")
-	public String hello() {
-		return "Hello welcome!";
-	}
+    @GetMapping("/h")
+    public String hello() {
+        return "Hello welcome!";
+    }
 
-	@PostMapping("/register")
-	ResponseEntity<User> createregister(@RequestBody User user) {
-		User create = regService.createUser(user);
-		return new ResponseEntity<User>(create, HttpStatus.CREATED);
-	}
+    @GetMapping("/")
+    public String home() {
+        return "Registration System is Running Successfully!";
+    }
+
+    @PostMapping("/register")
+    ResponseEntity<User> createregister(@RequestBody User user) {
+        User create = regService.createUser(user);
+        return new ResponseEntity<User>(create, HttpStatus.CREATED);
+    }
 }
